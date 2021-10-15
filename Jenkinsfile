@@ -65,7 +65,8 @@ pipeline {
         expression { DEPLOY_TARGET == 'true' }
       }
       steps {
-        sh 'helm install rabbitmq -f values.service.yaml bitnami/rabbitmq --namespace kube-system'
+        sh 'helm upgrade rabbitmq -f values.service.yaml bitnami/rabbitmq --namespace kube-system ./rabbitmq  || helm install rabbitmq -f values.service.yaml bitnami/rabbitmq --namespace kube-system ./rabbitmq'
+        sh 'kubectl apply -f ingress.yaml'
       }
     }
   }
