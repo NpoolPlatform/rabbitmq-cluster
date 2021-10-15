@@ -65,7 +65,6 @@ pipeline {
         expression { DEPLOY_TARGET == 'true' }
       }
       steps {
-        sh (returnStdout: true, script: '''
         sh 'helm install rabbitmq -f values.service.yaml bitnami/rabbitmq --namespace kube-system'
       }
     }
