@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rabbitmq-ingress
+  namespace: kube-system
+  annotations:
+    k8s.rabbitmq.cn/displayName: rabbitmq
+    k8s.rabbitmq.cn/workload: rabbitmq
+    nginx.org/websocket-services: "rabbitmq"
+    nginx.com/sticky-cookie-services: "serviceName=rabbitmq srv_id expires=1h path=/"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.class: "devops-vpn-nginx-internal"
+spec:
+  rules:
+  - host: rabbitmq.internal-devops.development.npool.top
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: rabbitmq
+          servicePort: http
