@@ -1,0 +1,6 @@
+replicaCount: 3
+fullNameOverride: "rabbitmq"
+image:
+  repository: bitnami/rabbitmq
+  tag: 3.9.7-debian-10-r0
+  pullPolicy: Always
