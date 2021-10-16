@@ -7,4 +7,3 @@ if [ ! $? -eq 0 ]; then
 fi
 
 /opt/bitnami/scripts/rabbitmq/entrypoint-inner.sh $@
-/opt/bitnami/scripts/rabbitmq/run-inner.sh $@
