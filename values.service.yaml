@@ -1,8 +1,8 @@
 replicaCount: 3
 fullNameOverride: "rabbitmq"
 image:
-  repository: bitnami/rabbitmq
-  tag: 3.9.7-debian-10-r0
+  repository: entropypool/rabbitmq
+  tag: 3.9.7
   pullPolicy: Always
 auth:
   password: "1234566"
