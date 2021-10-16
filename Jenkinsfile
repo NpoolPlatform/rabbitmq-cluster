@@ -40,6 +40,15 @@ pipeline {
       }
       steps {
         sh 'mkdir -p .docker-tmp; cp /usr/bin/consul .docker-tmp'
+        sh(returnStdout: true, script: '''
+          set +e
+          docker images | grep entropypool | grep rabbitmq
+          rc=$?
+          set -e
+          if [ 0 -eq $rc ]; then
+            docker rmi entropypool/rabbitmq:3.9.7
+          fi
+        '''.stripIndent())
         sh 'docker build -t entropypool/rabbitmq:3.9.7 .'
       }
     }
