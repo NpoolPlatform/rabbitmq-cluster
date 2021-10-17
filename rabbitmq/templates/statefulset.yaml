@@ -256,10 +256,11 @@ spec:
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
             exec:
-              command:
-                - /bin/bash
-                - -ec
-                - rabbitmq-diagnostics -q ping
+               command: ["rabbitmqctl", "status"]
+#              command:
+#                - /bin/bash
+#                - -ec
+#                - rabbitmq-diagnostics -q ping
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
@@ -271,10 +272,11 @@ spec:
           {{- if .Values.readinessProbe.enabled }}
           readinessProbe:
             exec:
-              command:
-                - /bin/bash
-                - -ec
-                - rabbitmq-diagnostics -q check_running && rabbitmq-diagnostics -q check_local_alarms
+              command: ["rabbitmqctl", "status"]
+#              command:
+#                - /bin/bash
+#                - -ec
+#                - rabbitmq-diagnostics -q check_running && rabbitmq-diagnostics -q check_local_alarms
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
