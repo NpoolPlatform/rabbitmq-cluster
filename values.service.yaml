@@ -5,4 +5,5 @@ image:
   tag: 3.9.7
   pullPolicy: Always
 auth:
-  password: "1234566"
+  username: user
+  existingPasswordSecret: rabbitmq

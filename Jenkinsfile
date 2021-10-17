@@ -74,6 +74,10 @@ pipeline {
         expression { DEPLOY_TARGET == 'true' }
       }
       steps {
+        sh (returnStdout: true, script: '''
+          export RABBITMQ_PASSWORD=$RABBITMQ_PASSWORD
+          envsubst < ./secret.yaml | kubectl apply -f -
+        '''.stripIndent())
         sh 'helm upgrade rabbitmq -f values.service.yaml --namespace kube-system ./rabbitmq  || helm install rabbitmq -f values.service.yaml --namespace kube-system ./rabbitmq'
         sh 'kubectl apply -f ingress.yaml'
       }
