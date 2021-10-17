@@ -425,7 +425,8 @@ schedulerName: ""
 ## ref : https://www.rabbitmq.com/clustering.html#restarting
 ## @param podManagementPolicy Pod management policy
 ##
-podManagementPolicy: OrderedReady
+# podManagementPolicy: OrderedReady
+podManagementPolicy: Parallel
 
 ## @param podLabels RabbitMQ Pod labels. Evaluated as a template
 ## Ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
