@@ -3,7 +3,7 @@ fullNameOverride: "rabbitmq"
 image:
   repository: entropypool/rabbitmq
   tag: 3.9.7
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 auth:
   username: user
   existingPasswordSecret: rabbitmq
