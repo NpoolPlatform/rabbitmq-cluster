@@ -82,7 +82,21 @@ pipeline {
         sh 'kubectl apply -f ingress.yaml'
       }
     }
+
+    stage('Config apollo') {
+      when {
+        expression { CONFIG_TARGET == 'true' }
+      }
+      steps {
+        sh 'rm .apollo-base-config -rf'
+        sh 'git clone https://github.com/NpoolPlatform/apollo-base-config.git .apollo-base-config'
+        sh 'cd .apollo-base-config; ./apollo-base-config.sh $APP_ID $TARGET_ENV rabbitmq-npool-top'
+        sh 'cd .apollo-base-config; ./apollo-item-config.sh $APP_ID $TARGET_ENV rabbitmq-npool-top username user'
+        sh 'cd .apollo-base-config; ./apollo-item-config.sh $APP_ID $TARGET_ENV rabbitmq-npool-top password $RABBITMQ_PASSWORD'
+      }
+    }
   }
+
   post('Report') {
     fixed {
       script {
