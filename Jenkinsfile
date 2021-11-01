@@ -41,13 +41,11 @@ pipeline {
       steps {
         sh 'mkdir -p .docker-tmp; cp /usr/bin/consul .docker-tmp'
         sh(returnStdout: true, script: '''
-          set +e
-          docker images | grep entropypool | grep rabbitmq
-          rc=$?
-          set -e
-          if [ 0 -eq $rc ]; then
-            docker rmi entropypool/rabbitmq:3.9.7
-          fi
+        sh(returnStdout: true, script: '''
+          images=`docker images | grep entropypool | grep rabbitmq | awk '{ print $3 }'`
+          for image in $images; do
+            docker rmi $image
+          done
         '''.stripIndent())
         sh 'docker build -t entropypool/rabbitmq:3.9.7 .'
       }
