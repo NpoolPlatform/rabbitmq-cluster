@@ -41,7 +41,6 @@ pipeline {
       steps {
         sh 'mkdir -p .docker-tmp; cp /usr/bin/consul .docker-tmp'
         sh(returnStdout: true, script: '''
-        sh(returnStdout: true, script: '''
           images=`docker images | grep entropypool | grep rabbitmq | awk '{ print $3 }'`
           for image in $images; do
             docker rmi $image
