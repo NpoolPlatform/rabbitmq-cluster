@@ -1,4 +1,4 @@
-replicaCount: 1
+replicaCount: 3
 fullNameOverride: "rabbitmq"
 image:
   repository: entropypool/rabbitmq
