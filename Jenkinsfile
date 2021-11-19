@@ -56,12 +56,14 @@ pipeline {
       }
       steps {
         sh(returnStdout: true, script: '''
+          set +e
           while true; do
             docker push entropypool/rabbitmq:3.9.7
             if [ $? -eq 0 ]; then
               break
             fi
           done
+          set -e
         '''.stripIndent())
       }
     }
