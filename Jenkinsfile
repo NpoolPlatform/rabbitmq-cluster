@@ -78,7 +78,7 @@ pipeline {
           envsubst < ./secret.yaml | kubectl apply -f -
         '''.stripIndent())
         sh 'RABBITMQ_ERLANG_COOKIE=$(kubectl get secret --namespace "kube-system" rabbitmq -o jsonpath="{.data.rabbitmq-erlang-cookie}" | base64 --decode); helm upgrade rabbitmq -f values.service.yaml --namespace kube-system --set auth.erlangCookie=$RABBITMQ_ERLANG_COOKIE ./rabbitmq || helm install rabbitmq -f values.service.yaml --namespace kube-system ./rabbitmq'
-        sh 'kubectl apply -f ingress.yaml'
+        sh 'kubectl apply -f 01-traefik-vpn-ingress.yaml'
       }
     }
 

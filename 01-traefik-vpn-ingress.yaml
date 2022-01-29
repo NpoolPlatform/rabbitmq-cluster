@@ -6,10 +6,9 @@ metadata:
   annotations:
     k8s.rabbitmq.cn/displayName: rabbitmq
     k8s.rabbitmq.cn/workload: rabbitmq
-    nginx.org/websocket-services: "rabbitmq"
-    nginx.com/sticky-cookie-services: "serviceName=rabbitmq srv_id expires=1h path=/"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    kubernetes.io/ingress.class: "devops-vpn-nginx-internal"
+    kubernetes.io/ingress.class: "traefik-internet-vpn"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure, web
+    traefik.ingress.kubernetes.io/router.middlewares: kube-system-common-headers@kubernetescrd
 spec:
   rules:
   - host: rabbitmq.internal-devops.development.npool.top
