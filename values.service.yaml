@@ -1,7 +1,8 @@
 replicaCount: 1
 fullNameOverride: "rabbitmq"
 image:
-  repository: uhub.service.ucloud.cn/entropypool/rabbitmq
+  registry: uhub.service.ucloud.cn
+  repository: entropypool/rabbitmq
   tag: 3.9.7
   pullPolicy: IfNotPresent
 auth:
