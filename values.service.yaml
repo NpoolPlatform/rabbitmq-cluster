@@ -8,3 +8,5 @@ image:
 auth:
   username: user
   existingPasswordSecret: rabbitmq
+persistence:
+  size: 20Gi
